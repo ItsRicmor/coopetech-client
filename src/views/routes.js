@@ -49,20 +49,20 @@ export const SaleMemberRoutes = {
   icon: faStore,
 };
 
-export const GaleryRoutes = {
-  name: 'Galería',
-  to: '/admin/gallery',
-  exact: true,
-  icon: faPhotoVideo,
-  children: [
-    {
-      to: '/admin/gallery',
-      name: 'Ver',
-      exact: true,
-    },
-    { to: '/admin/gallery/add', name: 'Añadir', exact: true },
-  ],
-};
+// export const GaleryRoutes = {
+//   name: 'Galería',
+//   to: '/admin/gallery',
+//   exact: true,
+//   icon: faPhotoVideo,
+//   children: [
+//     {
+//       to: '/admin/gallery',
+//       name: 'Ver',
+//       exact: true,
+//     },
+//     { to: '/admin/gallery/add', name: 'Añadir', exact: true },
+//   ],
+// };
 
 export const ReservationRoutes = {
   name: 'Reservas',
@@ -86,7 +86,7 @@ export default [
   ReviewRoutes,
   memberRoutes,
   LocalRoutes,
-  GaleryRoutes,
+  // GaleryRoutes,
   ReservationRoutes,
   SaleMemberRoutes,
 ];

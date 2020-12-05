@@ -1,23 +1,31 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import { CloseButton, Fade } from '../components/common/Toast';
-import Container from '../components/common/Container';
+import { Row, Container } from 'reactstrap';
 import loadable from '@loadable/component';
 import RouteEnum from '../../constants/RouteEnum';
+import Navbar from '../components/structure/Navbar';
+import Sidebar from '../components/structure/Sidebar';
+import Main from '../components/structure/Main';
 
 const HomePage = loadable(() => import('../pages/home'));
 
 const Layout = () => {
   return (
-    <Container>
-      <Router fallback={<span />}>
-        <Switch>
-          <Route path={RouteEnum.Home} exact component={HomePage} />
-        </Switch>
-        <ToastContainer transition={Fade} closeButton={<CloseButton />} position={toast.POSITION.BOTTOM_LEFT} />
-      </Router>
-    </Container>
+    <>
+      <Navbar />
+      <Container fluid>
+        <Row className="h-100">
+          <Sidebar />
+          <Main>
+            <Router fallback={<span />}>
+              <Switch>
+                <Route path={RouteEnum.Home} exact component={HomePage} />
+              </Switch>
+            </Router>
+          </Main>
+        </Row>
+      </Container>
+    </>
   );
 };
 
