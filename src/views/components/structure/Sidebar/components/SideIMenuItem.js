@@ -5,7 +5,6 @@ import { Badge } from 'reactstrap';
 import Flex from '../../../common/Flex';
 
 const SideMenuItem = ({ route }) => {
-  console.log(route);
   return (
     <Flex align="center">
       {route.icon && (
