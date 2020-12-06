@@ -1,104 +1,59 @@
-import { faClipboardCheck, faStore, faUsers, faUserLock, faStar, faAddressCard, faPhotoVideo } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faBoxes, faUsers, faStoreAlt } from '@fortawesome/free-solid-svg-icons';
+import RouteEnum from '../constants/RouteEnum';
 
-export const ReviewRoutes = {
-  name: 'Revisión',
-  to: '/admin/reviews',
+const DashboardRoute = {
+  name: 'Dashboard',
+  to: RouteEnum.Dashboard,
   exact: true,
-  icon: faClipboardCheck,
+  icon: faHome,
 };
 
-export const ReviewMemberRoutes = {
-  name: 'Revisión',
-  to: '/member/reviews',
+const InventoryRoute = {
+  name: 'Inventario',
+  to: RouteEnum.Inventory,
   exact: true,
-  icon: faClipboardCheck,
-};
-
-export const memberRoutes = {
-  name: 'Miembros',
-  to: '/admin/members',
-  exact: true,
-  icon: faUsers,
-};
-
-export const UserRoutes = {
-  name: 'Usuarios',
-  to: '/admin/users',
-  exact: true,
-  icon: faUserLock,
-};
-
-export const LocalRoutes = {
-  name: 'Locales',
-  to: '/admin/locals',
-  exact: true,
-  icon: faStore,
-};
-
-export const LocalMemberRoutes = {
-  name: 'Locales',
-  to: '/member/locals',
-  exact: true,
-  icon: faStore,
-};
-
-export const SaleMemberRoutes = {
-  name: 'Ventas',
-  to: '/member/sale',
-  exact: true,
-  icon: faStore,
-};
-
-export const GaleryRoutes = {
-  name: 'Galería',
-  to: '/admin/gallery',
-  exact: true,
-  icon: faPhotoVideo,
-  children: [
-    {
-      to: '/admin/gallery',
-      name: 'Ver',
-      exact: true,
-    },
-    { to: '/admin/gallery/add', name: 'Añadir', exact: true },
-  ],
-};
-
-export const ReservationRoutes = {
-  name: 'Reservas',
-  to: '/admin/reservations',
-  exact: true,
-  icon: faAddressCard,
-};
-
-export const ActivitiesRoutes = {
-  name: 'Actividades',
-  to: '/admin/activities',
-  exact: true,
-  icon: faStar,
-};
-
-export const widgetsRoutes = {
-  name: 'Widgets',
-  to: '/widgets',
-  exact: true,
-  icon: faPhotoVideo,
+  icon: faBoxes,
   badge: {
-    text: `New`,
-    color: 'success',
+    text: `building`,
+    color: 'warning',
   },
 };
 
-export default [
-  UserRoutes,
-  LocalMemberRoutes,
-  ReviewMemberRoutes,
-  ActivitiesRoutes,
-  ReviewRoutes,
-  memberRoutes,
-  LocalRoutes,
-  GaleryRoutes,
-  widgetsRoutes,
-  ReservationRoutes,
-  SaleMemberRoutes,
-];
+const AssociatesRoute = {
+  name: 'Asociados',
+  to: RouteEnum.Associates,
+  exact: true,
+  icon: faUsers,
+  badge: {
+    text: `soon`,
+    color: 'secondary',
+  },
+};
+
+const StoreRoute = {
+  name: 'Tienda',
+  to: RouteEnum.Store,
+  exact: true,
+  icon: faStoreAlt,
+  badge: {
+    text: `soon`,
+    color: 'secondary',
+  },
+};
+
+// export const GaleryRoutes = {
+//   name: 'Galería',
+//   to: '/admin/gallery',
+//   exact: true,
+//   icon: faPhotoVideo,
+//   children: [
+//     {
+//       to: '/admin/gallery',
+//       name: 'Ver',
+//       exact: true,
+//     },
+//     { to: '/admin/gallery/add', name: 'Añadir', exact: true },
+//   ],
+// };
+
+export default [DashboardRoute, InventoryRoute, AssociatesRoute, StoreRoute];
