@@ -41,3 +41,10 @@ body {
     transform: translateY(-50%) rotate(225deg);
   }
 }
+
+.card-header {
+  padding: 1rem 1.25rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  border-bottom: 0 solid #edf2f9;
+}
