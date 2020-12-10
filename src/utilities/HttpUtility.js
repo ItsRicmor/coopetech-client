@@ -68,15 +68,14 @@ export async function _request(restRequest, config) {
       method: restRequest.method,
       url: restRequest.url,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         ...config?.headers,
       },
     };
     const [axiosResponse] = await Promise.all([axios(axiosRequestConfig), _delay()]);
-    console.log(axiosResponses);
     const { status, data, request } = axiosResponse;
 
-    if (data.success === false) {
+    if (data.error) {
       return _fillInErrorWithDefaults(
         {
           status,
@@ -93,6 +92,7 @@ export async function _request(restRequest, config) {
       ...axiosResponse,
     };
   } catch (error) {
+    console.log(error);
     if (error.response) {
       // The request was made and the server responded with a status code that falls out of the range of 2xx
       const { status, statusText, data } = error.response;

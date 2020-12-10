@@ -17,6 +17,5 @@ function _restModelCreator(Model, response) {
   if (response instanceof HttpErrorResponseModel) {
     return response;
   }
-
-  return !Array.isArray(response.data) ? new Model(response.data) : response.data.map((json) => new Model(json));
+  return !Array.isArray(response.data.results) ? new Model(response.data.results) : response.data.results.map((json) => new Model(json));
 }
