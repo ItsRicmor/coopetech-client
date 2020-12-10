@@ -73,7 +73,7 @@ export async function _request(restRequest, config) {
       },
     };
     const [axiosResponse] = await Promise.all([axios(axiosRequestConfig), _delay()]);
-
+    console.log(axiosResponses);
     const { status, data, request } = axiosResponse;
 
     if (data.success === false) {

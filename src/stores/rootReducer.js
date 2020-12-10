@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import showsReducer from './shows/ShowsReducer';
+import productsReducer from './products/ProductsReducer';
 import requestingReducer from './requesting/RequestingReducer';
 import errorReducer from './error/ErrorReducer';
 import toastsReducer from './toasts/ToastsReducer';
@@ -10,8 +10,8 @@ export default function rootReducer(history) {
     error: errorReducer,
     requesting: requestingReducer,
     router: connectRouter(history),
-    shows: showsReducer,
     toasts: toastsReducer,
+    products: productsReducer,
   };
 
   return combineReducers(reducerMap);
