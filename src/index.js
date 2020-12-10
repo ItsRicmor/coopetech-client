@@ -1,7 +1,5 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-import 'jquery/dist/jquery.min.js';
-import 'bootstrap/dist/js/bootstrap.min.js';
 import './index.scss';
 
 import React from 'react';

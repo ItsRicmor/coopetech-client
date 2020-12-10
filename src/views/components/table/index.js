@@ -15,7 +15,7 @@ const selectRow = (onSelect) => ({
   columnClasses: 'py-2 align-middle',
   clickToSelect: false,
   selectionHeaderRenderer: ({ mode, ...rest }) => <SelectRowInput type="checkbox" {...rest} />,
-  selectionRenderer: ({ mode, ...rest }) => <SelectRowInput type={mode} {...rest} />,
+  selectionRenderer: ({ mode, rowKey, ...rest }) => <SelectRowInput type={mode} {...rest} rowkey={rowKey} />,
   headerColumnStyle: { border: 0, verticalAlign: 'middle' },
   selectColumnStyle: { border: 0, verticalAlign: 'middle' },
   onSelect: onSelect,

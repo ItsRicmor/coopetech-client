@@ -117,19 +117,34 @@ const Inventory = () => {
     <Card className="mb-3 mt-4">
       <CardHeader className="bg-light">
         <Row className="align-items-center">
-          <Col>
+          <Col sm={4} md={4} lg={6} xl={8}>
             <h5>Inventario</h5>
           </Col>
-          <Col className="text-right">
-            <ButtonIcon icon={faPlus} transform="shrink-3 down-2" color="success" size="sm" className="shadow-sm rounded" onClick={() => {}}>
-              Crear
-            </ButtonIcon>
-            <ButtonIcon icon={faFilter} transform="shrink-3 down-2" color="info" size="sm" className="mx-2 shadow-sm rounded">
-              Filtrar
-            </ButtonIcon>
-            <ButtonIcon icon={faExternalLinkAlt} transform="shrink-3 down-2" color="primary" size="sm" className="shadow-sm rounded">
-              Exportar
-            </ButtonIcon>
+          <Col sm={8} md={8} lg={6} xl={4} className="text-center text-sm-right">
+            {isSelected ? (
+              <InputGroup size="sm" className="input-group">
+                <CustomInput type="select" id="bulk-select">
+                  <option>Bulk actions</option>
+                  <option value="Delete">Delete</option>
+                  <option value="Archive">Archive</option>
+                </CustomInput>
+                <Button color="success" size="sm" className="ml-2">
+                  Apply
+                </Button>
+              </InputGroup>
+            ) : (
+              <>
+                <ButtonIcon icon={faPlus} transform="shrink-3 down-2" color="success" size="sm" className="shadow-sm rounded" onClick={() => {}}>
+                  Crear
+                </ButtonIcon>
+                <ButtonIcon icon={faFilter} transform="shrink-3 down-2" color="info" size="sm" className="mx-2 shadow-sm rounded">
+                  Filtrar
+                </ButtonIcon>
+                <ButtonIcon icon={faExternalLinkAlt} transform="shrink-3 down-2" color="primary" size="sm" className="shadow-sm rounded">
+                  Exportar
+                </ButtonIcon>
+              </>
+            )}
           </Col>
         </Row>
       </CardHeader>

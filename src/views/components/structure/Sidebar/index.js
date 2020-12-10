@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Nav, Collapse } from 'reactstrap';
+import AppContext from '../../../context';
 import SideMenu from './components/SideMenu';
 import allRoutes from '../../../routes';
+import useWindowDimensions from '../../../../utilities/hooks/useWindowDimensions';
+import BreakpointsEnum from '../../../../constants/BreakpointsEnum';
 import './sidebar.scss';
 
 const Sidebar = () => {
   const [routes] = useState(allRoutes);
+
+  const { isOpenSidebar } = useContext(AppContext);
+
+  const { width } = useWindowDimensions();
+
   return (
-    <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div className="sidebar-sticky pt-3">
+    <Collapse isOpen={isOpenSidebar || width >= BreakpointsEnum.MD} className="col-md-3 col-lg-2 d-md-block sidebar">
+      <Nav className="bg-light sidebar-sticky pt-3">
         <SideMenu routes={routes} />
-      </div>
-    </nav>
+      </Nav>
+    </Collapse>
   );
 };
 

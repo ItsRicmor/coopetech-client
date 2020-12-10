@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import AppContext from '../../../../context';
 import SideMenuItem from './SideIMenuItem';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Collapse, Nav, NavItem, NavLink as BootstrapNavLink } from 'reactstrap';
 
 const SideMenu = ({ routes = [], location }) => {
   const [openedIndex, setOpenedIndex] = useState(null);
+
+  const { closeMenuSidebar } = useContext(AppContext);
 
   useEffect(() => {
     let openedDropdown = null;
@@ -26,7 +29,7 @@ const SideMenu = ({ routes = [], location }) => {
         if (!route.children) {
           return (
             <NavItem key={index} className="pr-2">
-              <NavLink className="nav-link" activeClassName="active" {...route}>
+              <NavLink className="nav-link" activeClassName="active" onClick={closeMenuSidebar} {...route}>
                 <SideMenuItem route={route} />
               </NavLink>
             </NavItem>
