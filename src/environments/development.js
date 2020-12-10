@@ -1,6 +1,6 @@
 import environment from './base';
 
-const baseApi = 'http://localhost:8000';
+const baseApi = 'http://127.0.0.1:8000';
 const env = environment(baseApi);
 
 const developmentEnv = {
