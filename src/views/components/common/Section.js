@@ -4,11 +4,8 @@ import classNames from 'classnames';
 import { Container } from 'reactstrap';
 
 const Section = ({ fluid, className, children, ...rest }) => {
-  const bgProps = { image, overlay, position, video };
-  bgClassName && (bgProps.className = bgClassName);
-
   return (
-    <section className={classNames('bg-light', className)} {...rest}>
+    <section className={className} {...rest}>
       <Container fluid={fluid}>{children}</Container>
     </section>
   );

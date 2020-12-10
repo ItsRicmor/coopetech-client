@@ -4,13 +4,14 @@ import { FormGroup, Input, Label } from 'reactstrap';
 import MessageError from './MessageError';
 import classNames from 'classnames';
 
-const InputFrom = ({ name, label, id, value, type, className, placeholder, ...rest }) => (
+const InputFrom = ({ name, tag: Tag = Input, label, id, value, type, className, placeholder, errors, ...rest }) => (
   <FormGroup>
     {!!label && <Label for={id}>{label}</Label>}
-    <Input
+    <Tag
       name={name}
       id={id}
       defaultValue={value}
+      value={value}
       type={type}
       placeholder={placeholder}
       className={classNames(className, { 'border-danger': errors[name]?.message })}
@@ -31,3 +32,5 @@ InputFrom.defaultProps = {
   required: false,
   type: 'text',
 };
+
+export default InputFrom;

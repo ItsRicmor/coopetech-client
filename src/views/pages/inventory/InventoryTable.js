@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { createRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { Button, Card, CardBody, CardHeader, Col, Row, CustomInput, InputGroup } from 'reactstrap';
 import { faPlus, faFilter, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
+import RouteEnum from '../../../constants/RouteEnum';
 import Table from '../../components/table';
 import ButtonIcon from '../../components/common/ButtonIcon';
 import { ActionFormatter } from '../../components/table/formatters';
@@ -63,6 +64,7 @@ const columnsDefault = (onEditCell, onDeleteCell) => [
 
 const InventoryTable = ({ items }) => {
   const table = createRef();
+  const history = useHistory();
   const [isSelected, setIsSelected] = useState(false);
 
   const onSelect = () => {
@@ -108,7 +110,14 @@ const InventoryTable = ({ items }) => {
               </InputGroup>
             ) : (
               <>
-                <ButtonIcon icon={faPlus} transform="shrink-3 down-2" color="success" size="sm" className="shadow-sm rounded" onClick={() => {}}>
+                <ButtonIcon
+                  icon={faPlus}
+                  transform="shrink-3 down-2"
+                  color="success"
+                  size="sm"
+                  className="shadow-sm rounded"
+                  onClick={() => history.push(`${RouteEnum.Inventory}/create`)}
+                >
                   Crear
                 </ButtonIcon>
                 <ButtonIcon icon={faFilter} transform="shrink-3 down-2" color="info" size="sm" className="mx-2 shadow-sm rounded">

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Col, Row, Spinner } from 'reactstrap';
 
+import Flex from './Flex';
+
 const Loader = (props) => (
   <Row className="flex-center py-5 h-100">
-    <Col xs="auto d-flex justify-content-center align-items-center w-100">
+    <Flex tag={Col} align="center" justify="center" className="w-100" xs="auto">
       <Spinner {...props} />
-    </Col>
+    </Flex>
   </Row>
 );
 

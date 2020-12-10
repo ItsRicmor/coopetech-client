@@ -26,7 +26,7 @@ ProductProvider.propTypes = {
 };
 
 ProductProvider.defaultProps = {
-  defaultItem: false,
+  defaultItem: null,
 };
 
 export default ProductProvider;

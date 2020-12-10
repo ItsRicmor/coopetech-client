@@ -6,7 +6,7 @@ import Section from '../common/Section';
 const FormContainer = ({ children, Provider }) => (
   <Section className="py-0">
     <Row className="flex-center align-items-start min-vh-75 py-3">
-      <Col sm={10} lg={7} className="col-xxl-5">
+      <Col>
         <Provider>{children}</Provider>
       </Col>
     </Row>
@@ -14,7 +14,7 @@ const FormContainer = ({ children, Provider }) => (
 );
 
 FormContainer.propTypes = {
-  Provider: PropTypes.object.isRequired,
+  Provider: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
 
