@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import { Card, CardBody, CardFooter, CardHeader, Form, Row, Col, Button } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
+import { selectCategoriesToOptions } from '../../../../selectors/categories/CategoriesSelector';
 import Flex from '../../../components/common/Flex';
 import { InputForm, SelectInputForm } from '../../../components/forms/inputs';
 import { ProductContext } from '../../../context';
@@ -10,15 +12,11 @@ import { ProductContext } from '../../../context';
 const InventoryForm = (props) => {
   const { item, handleItemChange } = useContext(ProductContext);
   const history = useHistory();
-  const { register, handleSubmit, errors, watch } = useForm();
-  const onSubmitData = () => console.log(item);
+  const categoriesOptions = useSelector(selectCategoriesToOptions);
 
-  const selectOptions = [
-    { value: 1, label: 'Cocina' },
-    { value: 2, label: 'Taller' },
-    { value: 3, label: 'Alojamiento' },
-    { value: 4, label: 'Otros' },
-  ];
+  const { register, handleSubmit, errors, watch } = useForm();
+
+  const onSubmitData = () => console.log(item);
 
   const { description, quantity, price, brand, category_id } = item;
 
@@ -48,7 +46,7 @@ const InventoryForm = (props) => {
           </Col>
           <Col>
             <InputForm
-              label="Descripcion"
+              label="Descripción"
               name="description"
               value={description}
               placeholder="Descripción del producto"
@@ -80,7 +78,8 @@ const InventoryForm = (props) => {
               type="number"
               value={quantity}
               name="quantity"
-              placeholder="Descripción del producto"
+              placeholder="Cantidad del producto"
+              min={0}
               onChange={handleItemChange}
               errors={errors}
               innerRef={register({
@@ -94,7 +93,8 @@ const InventoryForm = (props) => {
               type="number"
               name="price"
               value={price}
-              placeholder="Descripción del producto"
+              placeholder="Precio"
+              min={0}
               onChange={handleItemChange}
               errors={errors}
               innerRef={register({
@@ -107,10 +107,10 @@ const InventoryForm = (props) => {
               label="Categoría"
               type="select"
               name="category_id"
-              value={selectOptions.filter((x) => x.value === category_id)[0]}
+              value={categoriesOptions.filter((x) => x.value === category_id)[0]}
               placeholder="Seleccioné una categoría"
               onChange={handleItemChange}
-              options={selectOptions}
+              options={categoriesOptions}
               errors={errors}
               innerRef={register({
                 required: 'Campo obligatorio',

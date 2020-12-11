@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 
-class ProductSelector {
+class ProductsSelector {
   static selectProducts(products) {
-    return ProductSelector._createTableRows(products);
+    return ProductsSelector._createTableRows(products);
   }
 
   static _createTableRows(models) {
@@ -17,6 +17,6 @@ class ProductSelector {
   }
 }
 
-export default ProductSelector;
+export default ProductsSelector;
 
-export const selectProducts = createSelector((state) => state.products.items, ProductSelector.selectProducts);
+export const selectProducts = createSelector((state) => state.products.items, ProductsSelector.selectProducts);

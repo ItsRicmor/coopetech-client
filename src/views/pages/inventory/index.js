@@ -1,22 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import InventoryTable from './InventoryTable';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectProducts } from '../../../selectors/products/ProductsSelector';
-import { selectRequesting } from '../../../selectors/requesting/RequestingSelector';
-import * as ProductsAction from '../../../stores/products/ProductsAction';
+import { useLoadProducts } from '../../../utilities/hooks';
 import Loader from '../../components/common/Loader';
 
 const AllManagement = () => {
-  const dispatch = useDispatch();
-
+  const isLoadProduct = useLoadProducts();
   const products = useSelector(selectProducts);
-  const isRequesting = useSelector((state) => selectRequesting(state, [ProductsAction.REQUEST_PRODUCTS]));
 
-  useEffect(() => {
-    dispatch(ProductsAction.getProducts());
-  }, [dispatch]);
-
-  return isRequesting ? <Loader /> : <InventoryTable items={products} />;
+  return isLoadProduct ? <Loader /> : <InventoryTable items={products} />;
 };
 
 export default React.memo(AllManagement);
