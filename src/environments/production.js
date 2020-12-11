@@ -5,7 +5,7 @@ import environment from './base';
  * You shouldn't have override anything.
  */
 
-const baseApi = 'https://api.tvmaze.com';
+const baseApi = 'https://secret-island-68398.herokuapp.com';
 const env = environment(baseApi);
 
 const productionEnv = {
