@@ -1,22 +1,47 @@
-import React, { useContext } from 'react';
-import { Card, CardBody, CardFooter, CardHeader, Form, Row, Col, Button } from 'reactstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Card, CardBody, CardFooter, CardHeader, Form, Row, Col } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { faSpinner, faArrowLeft, faSave, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
+import * as ProductsAction from '../../../../stores/products/ProductsAction';
 import { selectCategoriesToOptions } from '../../../../selectors/categories/CategoriesSelector';
+import { useIsRequesting, useHasErrors } from '../../../../utilities/hooks';
+import RouteMap from '../../../../constants/RouteMap';
+import { delay } from '../../../../utilities/utils';
+
 import Flex from '../../../components/common/Flex';
+import ButtonIcon from '../../../components/common/ButtonIcon';
 import { InputForm, SelectInputForm } from '../../../components/forms/inputs';
 import { ProductContext } from '../../../context';
 
-const InventoryForm = (props) => {
+const InventoryForm = () => {
+  const [sent, setSent] = useState(false);
   const { item, handleItemChange } = useContext(ProductContext);
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const categoriesOptions = useSelector(selectCategoriesToOptions);
+
+  const isRequesting = useIsRequesting([ProductsAction.REQUEST_PRODUCTS_CREATE]);
+  const hasErrors = useHasErrors([ProductsAction.REQUEST_PRODUCTS_CREATE_FINISHED]);
 
   const { register, handleSubmit, errors, watch } = useForm();
 
-  const onSubmitData = () => console.log(item);
+  useEffect(() => {
+    (async () => {
+      if (sent && !hasErrors) {
+        await delay();
+        history.push(RouteMap.Inventory.root);
+      }
+    })();
+  }, [hasErrors, sent, history]);
+
+  const onSubmitData = async () => {
+    await dispatch(ProductsAction.createProduct(item));
+    setSent(true);
+  };
 
   const { description, quantity, price, brand, category_id } = item;
 
@@ -31,7 +56,7 @@ const InventoryForm = (props) => {
       </CardHeader>
       <CardBody className="fs--1 font-weight-normal px-md-6 pt-4 pb-3">
         <Row form>
-          <Col>
+          <Col sm={6} md={6} lg={4}>
             <InputForm
               label="Código"
               name="id"
@@ -44,7 +69,7 @@ const InventoryForm = (props) => {
               })}
             />
           </Col>
-          <Col>
+          <Col sm={6} md={6} lg={4}>
             <InputForm
               label="Descripción"
               name="description"
@@ -57,7 +82,7 @@ const InventoryForm = (props) => {
               })}
             />
           </Col>
-          <Col>
+          <Col sm={6} md={6} lg={4}>
             <InputForm
               label="Marca"
               name="brand"
@@ -70,9 +95,7 @@ const InventoryForm = (props) => {
               })}
             />
           </Col>
-        </Row>
-        <Row form>
-          <Col>
+          <Col sm={6} md={6} lg={4}>
             <InputForm
               label="Cantidad"
               type="number"
@@ -87,7 +110,7 @@ const InventoryForm = (props) => {
               })}
             />
           </Col>
-          <Col>
+          <Col sm={6} md={6} lg={4}>
             <InputForm
               label="Precio por unidad"
               type="number"
@@ -102,7 +125,7 @@ const InventoryForm = (props) => {
               })}
             />
           </Col>
-          <Col>
+          <Col sm={6} md={6} lg={4}>
             <SelectInputForm
               label="Categoría"
               type="select"
@@ -122,12 +145,19 @@ const InventoryForm = (props) => {
       <CardFooter className="px-md-6 bg-light">
         <Row form>
           <Flex tag={Col} justify="center" className="justify-content-md-end">
-            <Button className="m-1 shadow-sm" onClick={() => history.goBack()}>
+            <ButtonIcon icon={faArrowLeft} className="m-1 shadow-sm" onClick={() => history.goBack()}>
               Volver
-            </Button>
-            <Button className="m-1 shadow-sm" color="success" type="submit">
+            </ButtonIcon>
+            <ButtonIcon
+              icon={isRequesting ? faSpinner : sent ? faCheckCircle : faSave}
+              spin={isRequesting}
+              disabled={sent}
+              className="m-1 shadow-sm"
+              color="success"
+              type="submit"
+            >
               Crear Producto
-            </Button>
+            </ButtonIcon>
           </Flex>
         </Row>
       </CardFooter>

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ButtonIcon = ({ icon, iconAlign, iconClassName, transform, children, ...rest }) => (
+const ButtonIcon = ({ icon, iconAlign, iconClassName, transform, spin, children, ...rest }) => (
   <Button {...rest}>
     {iconAlign === 'right' && children}
     <FontAwesomeIcon
@@ -13,6 +13,7 @@ const ButtonIcon = ({ icon, iconAlign, iconClassName, transform, children, ...re
         'mr-1': children && iconAlign === 'left',
         'ml-1': children && iconAlign === 'right',
       })}
+      spin={spin}
       transform={transform}
     />
     {iconAlign === 'left' && children}
@@ -28,6 +29,6 @@ ButtonIcon.propTypes = {
   transform: PropTypes.string,
 };
 
-ButtonIcon.defaultProps = { iconAlign: 'left' };
+ButtonIcon.defaultProps = { iconAlign: 'left', spin: false };
 
 export default ButtonIcon;

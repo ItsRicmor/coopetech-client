@@ -9,6 +9,8 @@ export default class ProductModel extends BaseModel {
   brand = '';
   category_id = 0;
   category = CategoryModel;
+  created_at = '';
+  updated_at = '';
 
   constructor(data = {}) {
     super();

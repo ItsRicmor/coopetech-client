@@ -9,3 +9,12 @@ export function getProducts() {
     await ActionUtility.createThunkEffect(dispatch, REQUEST_PRODUCTS, ProductsEffect.requestProducts);
   };
 }
+
+export const REQUEST_PRODUCTS_CREATE = 'ProductsAction.REQUEST_PRODUCTS_CREATE';
+export const REQUEST_PRODUCTS_CREATE_FINISHED = 'ProductsAction.REQUEST_PRODUCTS_CREATE_FINISHED';
+
+export function createProduct(product) {
+  return async (dispatch, getState) => {
+    await ActionUtility.createThunkEffect(dispatch, REQUEST_PRODUCTS_CREATE, ProductsEffect.requestCreateProduct, product);
+  };
+}

@@ -13,6 +13,13 @@ const productReducer = baseReducer(initialState, {
       items: action.payload,
     };
   },
+  [ProductsAction.REQUEST_PRODUCTS_CREATE_FINISHED](state, action) {
+    const product = action.payload;
+    return {
+      ...state,
+      items: [product, ...state.items],
+    };
+  },
 });
 
 export default productReducer;

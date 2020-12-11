@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import * as ProductsAction from '../../stores/products/ProductsAction';
-import { selectRequesting } from '../../selectors/requesting/RequestingSelector';
-import { useSelector, useDispatch } from 'react-redux';
+import useIsRequesting from './useIsRequesting';
 
 const useLoadProducts = () => {
   const dispatch = useDispatch();
-  const isRequesting = useSelector((state) => selectRequesting(state, [ProductsAction.REQUEST_PRODUCTS]));
+  const isRequesting = useIsRequesting([ProductsAction.REQUEST_PRODUCTS]);
   useEffect(() => {
     dispatch(ProductsAction.getProducts());
   }, [dispatch]);

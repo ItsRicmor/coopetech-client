@@ -1,0 +1,46 @@
+.react-select__control {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-color: $input-bg !important;
+
+  .react-select__value-container {
+    padding-left: $card-spacer-x;
+    padding-right: $card-spacer-x;
+  }
+
+  .react-select__placeholder {
+    color: #b6c1d2;
+    margin: 0;
+  }
+
+  @include hover-focus {
+    outline: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .react-select__multi-value {
+    background-color: #edf2f9 !important;
+    border-radius: 0.25rem;
+  }
+}
+
+.react-select__menu {
+  .react-select__option {
+    padding-left: 5px;
+    padding-right: 5px;
+
+    @include hover-focus {
+      color: #fff !important;
+    }
+  }
+}
+.react-select__indicator-separator {
+  background-color: #d8e2ef !important;
+}
+
+.react-select__indicator svg {
+  color: #d8e2ef !important;
+}

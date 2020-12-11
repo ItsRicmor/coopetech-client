@@ -1,5 +1,11 @@
 @import '~bootstrap/scss/bootstrap';
 
+@import './assets/scss/plugins/react-bootstrap-table2-sort';
+@import './assets/scss/plugins/react-datetime';
+@import './assets/scss/plugins/react-select';
+@import './assets/scss/plugins/slick';
+@import './assets/scss/plugins/toastify';
+
 * {
   margin: 0;
   padding: 0;

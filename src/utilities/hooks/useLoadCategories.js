@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import * as CategoriesAction from '../../stores/categories/CategoriesAction';
-import { selectRequesting } from '../../selectors/requesting/RequestingSelector';
-import { useSelector, useDispatch } from 'react-redux';
+import useIsRequesting from './useIsRequesting';
 
 const useLoadCategories = () => {
   const dispatch = useDispatch();
-  const isRequesting = useSelector((state) => selectRequesting(state, [CategoriesAction.REQUEST_CATEGORIES]));
+  const isRequesting = useIsRequesting([CategoriesAction.REQUEST_CATEGORIES]);
   useEffect(() => {
     dispatch(CategoriesAction.getCategories());
   }, [dispatch]);

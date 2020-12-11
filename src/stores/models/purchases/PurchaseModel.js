@@ -8,6 +8,8 @@ export default class PurchaseModel extends BaseModel {
   total = 0.0;
   product_id = 0;
   product = ProductModel;
+  created_at = '';
+  updated_at = '';
 
   constructor(data = {}) {
     super();

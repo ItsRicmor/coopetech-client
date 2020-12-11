@@ -63,3 +63,7 @@ export const getPaginationArray = (totalSize, sizePerPage) => {
 };
 
 export const capitalize = (str) => (str.charAt(0).toUpperCase() + str.slice(1)).replace(/-/g, ' ');
+
+export const delay = (duration = 250) => {
+  return new Promise((resolve) => setTimeout(resolve, duration));
+};

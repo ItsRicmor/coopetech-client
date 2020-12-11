@@ -1,5 +1,6 @@
 import axios from 'axios';
 import HttpErrorResponseModel from '../models/HttpErrorResponseModel';
+import { delay } from './utils';
 
 const RequestMethod = {
   Get: 'GET',
@@ -72,7 +73,7 @@ export async function _request(restRequest, config) {
         ...config?.headers,
       },
     };
-    const [axiosResponse] = await Promise.all([axios(axiosRequestConfig), _delay()]);
+    const [axiosResponse] = await Promise.all([axios(axiosRequestConfig), delay()]);
     const { status, data, request } = axiosResponse;
 
     if (data.error) {
@@ -151,17 +152,4 @@ function _fillInErrorWithDefaults(error, request) {
   model.errors = model.errors.filter(Boolean);
 
   return model;
-}
-
-/**
- * We want to show the loading indicator to the user but sometimes the api
- * request finished too quickly. This makes sure there the loading indicator is
- * visual for at least a given time.
- *
- * @param duration
- * @returns {Promise<void>}
- * @private
- */
-function _delay(duration = 250) {
-  return new Promise((resolve) => setTimeout(resolve, duration));
 }
