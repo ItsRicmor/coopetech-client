@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Button, Card, CardBody, CardHeader, Col, Row, CustomInput, InputGroup } from 'reactstrap';
 import { faPlus, faFilter, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
-import RouteEnum from '../../../constants/RouteEnum';
+import RouteMap from '../../../constants/RouteMap';
 import Table from '../../components/table';
 import ButtonIcon from '../../components/common/ButtonIcon';
 import { ActionFormatter } from '../../components/table/formatters';
@@ -116,7 +116,7 @@ const InventoryTable = ({ items }) => {
                   color="success"
                   size="sm"
                   className="shadow-sm rounded"
-                  onClick={() => history.push(`${RouteEnum.Inventory}/create`)}
+                  onClick={() => history.push(RouteMap.Inventory.create)}
                 >
                   Crear
                 </ButtonIcon>

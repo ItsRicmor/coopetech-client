@@ -1,24 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, Input, Label } from 'reactstrap';
-import MessageError from './MessageError';
+import { Input } from 'reactstrap';
+import InputContainerFrom from './components/InputContainerForm';
 import classNames from 'classnames';
 
-const InputFrom = ({ name, tag: Tag = Input, label, id, value, type, className, placeholder, errors, ...rest }) => (
-  <FormGroup>
-    {!!label && <Label for={id}>{label}</Label>}
-    <Tag
+const InputFrom = ({ name, label, id, value, type, className, placeholder, onChange, errors, ...rest }) => (
+  <InputContainerFrom label={label} id={id} errors={errors} message>
+    <Input
       name={name}
       id={id}
       defaultValue={value}
-      value={value}
       type={type}
+      onChange={({ target: { value } }) => onChange({ name: name, value })}
       placeholder={placeholder}
       className={classNames(className, { 'border-danger': errors[name]?.message })}
       {...rest}
     />
-    <MessageError error={errors[name]?.message} className="mt-1" />
-  </FormGroup>
+  </InputContainerFrom>
 );
 
 InputFrom.propTypes = {

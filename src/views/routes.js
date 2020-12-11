@@ -1,16 +1,16 @@
 import { faHome, faBoxes, faUsers, faStoreAlt } from '@fortawesome/free-solid-svg-icons';
-import RouteEnum from '../constants/RouteEnum';
+import RouteMap from '../constants/RouteMap';
 
 const DashboardRoute = {
   name: 'Dashboard',
-  to: RouteEnum.Dashboard,
+  to: RouteMap.Dashboard.root,
   exact: true,
   icon: faHome,
 };
 
 const InventoryRoute = {
   name: 'Inventario',
-  to: RouteEnum.Inventory,
+  to: RouteMap.Inventory.root,
   exact: true,
   icon: faBoxes,
   badge: {
@@ -21,7 +21,7 @@ const InventoryRoute = {
 
 const AssociatesRoute = {
   name: 'Asociados',
-  to: RouteEnum.Associates,
+  to: RouteMap.Associates.root,
   exact: true,
   icon: faUsers,
   badge: {
@@ -32,7 +32,7 @@ const AssociatesRoute = {
 
 const StoreRoute = {
   name: 'Tienda',
-  to: RouteEnum.Store,
+  to: RouteMap.Store.root,
   exact: true,
   icon: faStoreAlt,
   badge: {
