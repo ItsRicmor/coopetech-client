@@ -58,7 +58,7 @@
   },
   "scripts": {
     "---------- DEVELOPMENT ---------------------------------------------------------------------------------": "",
-    "start": "node server.js",
+    "start": "cross-env CLIENT_ENV=development craco start",
     "prod": "cross-env CLIENT_ENV=production craco start",
     "---------- PRODUCTION ----------------------------------------------------------------------------------": "",
     "build": "cross-env CLIENT_ENV=production craco build",
