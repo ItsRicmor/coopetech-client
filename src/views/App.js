@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { ConnectedRouter } from 'connected-react-router';
 import AppContext from './context';
 import Layout from './layouts/Layout';
+import { useToastEffect } from '../utilities/hooks';
 
-const Provider = AppContext.Provider;
+const { Provider } = AppContext;
 
 export default (props) => {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+
+  useToastEffect();
 
   const toggleMenuSidebar = () => setIsOpenSidebar(!isOpenSidebar);
 

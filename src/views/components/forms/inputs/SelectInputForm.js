@@ -4,9 +4,10 @@ import Select from 'react-select';
 import InputContainerFrom from './components/InputContainerForm';
 import classNames from 'classnames';
 
-const SelectInputFrom = ({ name, label, id, value, type, className, placeholder, options, onChange, errors, ...rest }) => (
+const SelectInputFrom = ({ name, label, id, tag: Tag = Select, value, type, className, placeholder, options, onChange, errors, ...rest }) => (
   <InputContainerFrom label={label} id={id} errors={errors} message>
-    <Select
+    <Tag
+      isClearable
       name={name}
       id={id}
       value={value}

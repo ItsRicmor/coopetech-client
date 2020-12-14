@@ -80,8 +80,8 @@ export async function _request(restRequest, config) {
       return _fillInErrorWithDefaults(
         {
           status,
-          message: data.errors.join(' - '),
-          errors: data.errors,
+          message: data.message,
+          errors: data.results,
           url: request ? request.responseURL : restRequest.url,
           raw: axiosResponse,
         },
@@ -93,7 +93,6 @@ export async function _request(restRequest, config) {
       ...axiosResponse,
     };
   } catch (error) {
-    console.log(error);
     if (error.response) {
       // The request was made and the server responded with a status code that falls out of the range of 2xx
       const { status, statusText, data } = error.response;
@@ -102,7 +101,7 @@ export async function _request(restRequest, config) {
       return _fillInErrorWithDefaults(
         {
           status,
-          message: errors.filter(Boolean).join(' - '),
+          message: data.message || errors.filter(Boolean).join(' - '),
           errors,
           url: error.request.responseURL,
           raw: error.response,
@@ -143,8 +142,8 @@ function _fillInErrorWithDefaults(error, request) {
   const model = new HttpErrorResponseModel();
 
   model.status = error.status || 0;
-  model.message = error.message || 'Error requesting data';
-  model.errors = error.errors.length ? error.errors : ['Error requesting data'];
+  model.message = error.message || 'Error solicitando datos al servidor';
+  model.errors = error.errors.length ? error.errors : ['Error solicitando datos al servidor'];
   model.url = error.url || request.url;
   model.raw = error.raw;
 

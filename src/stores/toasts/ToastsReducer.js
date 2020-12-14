@@ -18,7 +18,7 @@ const toastsReducer = baseReducer(initialState, {
 
     return {
       ...state,
-      items: state.items.filter((model) => model.id !== toastId),
+      items: [...state.items.filter((model) => model.id !== toastId)],
     };
   },
 });

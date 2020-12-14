@@ -34,6 +34,10 @@ const InventoryForm = () => {
       if (sent && !hasErrors) {
         await delay();
         history.push(RouteMap.Inventory.root);
+      } else {
+        if (sent) {
+          setSent(false);
+        }
       }
     })();
   }, [hasErrors, sent, history]);
