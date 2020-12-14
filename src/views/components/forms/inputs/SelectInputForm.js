@@ -12,7 +12,11 @@ const SelectInputFrom = ({ name, label, id, tag: Tag = Select, value, type, clas
       id={id}
       value={value}
       type={type}
-      onChange={({ value }) => onChange({ name: name, value })}
+      onChange={(option) => {
+        console.log(option);
+        const { value = null } = option || {};
+        onChange({ name: name, value });
+      }}
       placeholder={placeholder}
       options={options}
       className={classNames(className, { 'border-danger': errors[name]?.message })}

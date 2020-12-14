@@ -13,10 +13,10 @@ class CategoriesSelector {
   };
 
   static selectCategoriesToOptions = (categories) => {
-    return CategoriesSelector._localsToOptionRows(categories);
+    return CategoriesSelector._categoriesToOptionRows(categories);
   };
 
-  static _localsToOptionRows = (models) => {
+  static _categoriesToOptionRows = (models) => {
     return models.map(({ name, id }) => {
       return {
         value: id,

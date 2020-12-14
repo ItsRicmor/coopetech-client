@@ -7,7 +7,9 @@ import { faSpinner, faArrowLeft, faSave, faCheckCircle } from '@fortawesome/free
 
 import * as ProductsAction from '../../../../stores/products/ProductsAction';
 import * as CategoriesAction from '../../../../stores/categories/CategoriesAction';
+import * as BrandsAction from '../../../../stores/brands/BrandsAction';
 import { selectCategoriesToOptions } from '../../../../selectors/categories/CategoriesSelector';
+import { selectBrandsToOptions } from '../../../../selectors/brands/BrandsSelector';
 import { useIsRequesting, useHasErrors } from '../../../../utilities/hooks';
 import RouteMap from '../../../../constants/RouteMap';
 import { delay } from '../../../../utilities/utils';
@@ -22,13 +24,16 @@ const InventoryForm = () => {
   const { item, handleItemChange } = useContext(ProductContext);
   const history = useHistory();
   const dispatch = useDispatch();
-  console.log(item);
 
   const categoriesOptions = useSelector(selectCategoriesToOptions);
+
+  const brandsOptions = useSelector(selectBrandsToOptions);
 
   const isRequesting = useIsRequesting([ProductsAction.REQUEST_PRODUCTS_CREATE]);
 
   const isCreatingCategory = useIsRequesting([CategoriesAction.REQUEST_CATEGORIES_CREATE]);
+
+  const isCreatingBrand = useIsRequesting([BrandsAction.REQUEST_BRANDS_CREATE]);
 
   const hasErrors = useHasErrors([ProductsAction.REQUEST_PRODUCTS_CREATE_FINISHED]);
 
@@ -62,7 +67,11 @@ const InventoryForm = () => {
     dispatch(CategoriesAction.createCategory({ name: value }, callback('category_id')));
   };
 
-  const { description, quantity, price, brand, category_id } = item;
+  const handleBrandCreateOption = async (value) => {
+    dispatch(BrandsAction.createBrand({ name: value }, callback('brand_id')));
+  };
+
+  const { description, quantity, price, brand_id, category_id } = item;
 
   return (
     <Card tag={Form} onSubmit={handleSubmit(onSubmitData)} className="shadow-sm">
@@ -102,13 +111,17 @@ const InventoryForm = () => {
             />
           </Col>
           <Col sm={6} md={6} lg={4}>
-            <InputForm
+            <CreatableSelectInputForm
               label="Marca"
-              name="brand"
-              value={brand}
-              placeholder="Marca del producto"
+              type="select"
+              name="brand_id"
+              value={brandsOptions.filter((x) => x.value === brand_id)[0]}
+              placeholder="Seleccioné una marca"
               onChange={handleItemChange}
+              options={brandsOptions}
               errors={errors}
+              onCreateOption={handleBrandCreateOption}
+              isLoading={isCreatingBrand}
               innerRef={register({
                 required: 'Campo obligatorio',
               })}

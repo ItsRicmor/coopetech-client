@@ -18,12 +18,12 @@ class ProductsSelector {
   };
 
   static _createTableRows = (models) => {
-    return models.map(({ category, ...model }) => ({
+    return models.map(({ category, brand, ...model }) => ({
       id: model.id,
       description: model.description,
       quantity: model.quantity,
       price: `₡ ${model.price}`,
-      brand: model.brand,
+      brand: brand.name,
       category: category.name,
     }));
   };

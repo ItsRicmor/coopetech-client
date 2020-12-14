@@ -16,13 +16,14 @@ export function getCategories() {
 export const REQUEST_CATEGORIES_CREATE = 'CategoriesAction.REQUEST_CATEGORIES_CREATE';
 export const REQUEST_CATEGORIES_CREATE_FINISHED = 'CategoriesAction.REQUEST_CATEGORIES_CREATE_FINISHED';
 
-export function createCategory(category, callback) {
+export function createCategory(category, callback = (id) => ({ id })) {
   return async (dispatch, getState) => {
     const response = await ActionUtility.createThunkEffect(dispatch, REQUEST_CATEGORIES_CREATE, CategoriesEffect.requestCreateCategory, category);
     if (!(response instanceof HttpErrorResponseModel)) {
       callback(response.id);
       dispatch(ToastsAction.add('Categoría agregada', ToastStatusEnum.Success));
+    } else {
+      callback(false);
     }
-    callback(false);
   };
 }
