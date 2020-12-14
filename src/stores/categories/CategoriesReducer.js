@@ -6,13 +6,20 @@ export const initialState = {
   items: [],
 };
 
-const productReducer = baseReducer(initialState, {
+const categoriesReducer = baseReducer(initialState, {
   [CategoriesAction.REQUEST_CATEGORIES_FINISHED](state, action) {
     return {
       ...state,
       items: action.payload,
     };
   },
+  [CategoriesAction.REQUEST_CATEGORIES_CREATE_FINISHED](state, action) {
+    const categories = action.payload;
+    return {
+      ...state,
+      items: [categories, ...state.items],
+    };
+  },
 });
 
-export default productReducer;
+export default categoriesReducer;

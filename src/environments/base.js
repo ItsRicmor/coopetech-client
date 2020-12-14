@@ -15,6 +15,7 @@ export default function baseEnv(baseApi) {
       errorExample: 'https://httpstat.us/520',
       products: `${baseApi}/api/products/:id`,
       categories: `${baseApi}/api/categories/:id`,
+      brands: `${baseApi}/api/brands/:id`,
     },
     isProduction: true,
     isDevelopment: false,

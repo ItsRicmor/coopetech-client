@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { faSpinner, faArrowLeft, faSave, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 import * as ProductsAction from '../../../../stores/products/ProductsAction';
+import * as CategoriesAction from '../../../../stores/categories/CategoriesAction';
 import { selectCategoriesToOptions } from '../../../../selectors/categories/CategoriesSelector';
 import { useIsRequesting, useHasErrors } from '../../../../utilities/hooks';
 import RouteMap from '../../../../constants/RouteMap';
@@ -13,7 +14,7 @@ import { delay } from '../../../../utilities/utils';
 
 import Flex from '../../../components/common/Flex';
 import ButtonIcon from '../../../components/common/ButtonIcon';
-import { InputForm, SelectInputForm } from '../../../components/forms/inputs';
+import { InputForm, CreatableSelectInputForm } from '../../../components/forms/inputs';
 import { ProductContext } from '../../../context';
 
 const InventoryForm = () => {
@@ -21,13 +22,17 @@ const InventoryForm = () => {
   const { item, handleItemChange } = useContext(ProductContext);
   const history = useHistory();
   const dispatch = useDispatch();
+  console.log(item);
 
   const categoriesOptions = useSelector(selectCategoriesToOptions);
 
   const isRequesting = useIsRequesting([ProductsAction.REQUEST_PRODUCTS_CREATE]);
+
+  const isCreatingCategory = useIsRequesting([CategoriesAction.REQUEST_CATEGORIES_CREATE]);
+
   const hasErrors = useHasErrors([ProductsAction.REQUEST_PRODUCTS_CREATE_FINISHED]);
 
-  const { register, handleSubmit, errors, watch } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   useEffect(() => {
     (async () => {
@@ -45,6 +50,16 @@ const InventoryForm = () => {
   const onSubmitData = async () => {
     await dispatch(ProductsAction.createProduct(item));
     setSent(true);
+  };
+
+  const callback = (name) => (id = false) => {
+    if (id) {
+      handleItemChange({ name, value: id });
+    }
+  };
+
+  const handleCategoryCreateOption = async (value) => {
+    dispatch(CategoriesAction.createCategory({ name: value }, callback('category_id')));
   };
 
   const { description, quantity, price, brand, category_id } = item;
@@ -130,7 +145,7 @@ const InventoryForm = () => {
             />
           </Col>
           <Col sm={6} md={6} lg={4}>
-            <SelectInputForm
+            <CreatableSelectInputForm
               label="Categoría"
               type="select"
               name="category_id"
@@ -139,6 +154,8 @@ const InventoryForm = () => {
               onChange={handleItemChange}
               options={categoriesOptions}
               errors={errors}
+              onCreateOption={handleCategoryCreateOption}
+              isLoading={isCreatingCategory}
               innerRef={register({
                 required: 'Campo obligatorio',
               })}
