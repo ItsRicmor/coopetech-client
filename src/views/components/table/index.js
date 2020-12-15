@@ -1,6 +1,5 @@
 import React from 'react';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-
 import PropTypes from 'prop-types';
 import { Button, Col, Row } from 'reactstrap';
 import paginationFactory, { PaginationProvider } from 'react-bootstrap-table2-paginator';
@@ -23,7 +22,7 @@ const selectRow = (onSelect) => ({
 });
 
 const Table = (props) => {
-  const { options, columns, items, reference, onSelect } = props;
+  const { baseProps, options, reference, onSelect } = props;
   const handleNextPage = ({ page, onPageChange }) => () => {
     onPageChange(page + 1);
   };
@@ -31,6 +30,7 @@ const Table = (props) => {
   const handlePrevPage = ({ page, onPageChange }) => () => {
     onPageChange(page - 1);
   };
+
   return (
     <PaginationProvider pagination={paginationFactory(options)}>
       {({ paginationProps, paginationTableProps }) => {
@@ -40,10 +40,7 @@ const Table = (props) => {
             <div className="table-responsive">
               <BootstrapTable
                 ref={reference}
-                bootstrap4
-                keyField="id"
-                data={items}
-                columns={columns}
+                {...baseProps}
                 selectRow={selectRow(onSelect)}
                 bordered={false}
                 classes="table-dashboard table-striped table-sm fs--1 border-bottom border-200 mb-0 table-dashboard-th-nowrap"
@@ -89,9 +86,7 @@ const Table = (props) => {
 Table.propTypes = {
   onSelect: PropTypes.func.isRequired,
   reference: PropTypes.object.isRequired,
-  columns: PropTypes.array.isRequired,
   options: PropTypes.object.isRequired,
-  items: PropTypes.array.isRequired,
 };
 
 export default React.memo(Table);
