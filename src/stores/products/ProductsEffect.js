@@ -17,7 +17,7 @@ export async function requestUpdateProduct(product) {
   return EffectUtility.putToModel(ProductModel, endpoint, product);
 }
 
-export async function requestDeleteBrand(id) {
+export async function requestDeleteProduct(id) {
   const endpoint = environment.api.products.replace(':id', id);
   return EffectUtility.deleteToModel(ProductModel, endpoint);
 }

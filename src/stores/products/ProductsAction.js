@@ -13,8 +13,8 @@ export function getProducts() {
   };
 }
 
-export const REQUEST_PRODUCTS_UPDATE = 'ProductsAction.REQUEST_PRODUCTS_UPDATE';
-export const REQUEST_PRODUCTS_UPDATE_FINISHED = 'ProductsAction.REQUEST_PRODUCTS_UPDATE_FINISHED';
+export const REQUEST_PRODUCTS_CREATE = 'ProductsAction.REQUEST_PRODUCTS_CREATE';
+export const REQUEST_PRODUCTS_CREATE_FINISHED = 'ProductsAction.REQUEST_PRODUCTS_CREATE_FINISHED';
 
 export function createProduct(product, callback = (id) => ({ id })) {
   return async (dispatch, getState) => {

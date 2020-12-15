@@ -18,7 +18,7 @@ export async function requestUpdateCategory(category) {
   return EffectUtility.putToModel(CategoryModel, endpoint, category);
 }
 
-export async function requestDeleteProduct(id) {
+export async function requestDeleteCategory(id) {
   const endpoint = environment.api.categories.replace(':id', id);
   return EffectUtility.deleteToModel(CategoryModel, endpoint);
 }

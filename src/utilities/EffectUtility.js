@@ -20,7 +20,7 @@ export async function putToModel(Model, endpoint, data) {
 }
 
 export async function deleteToModel(Model, endpoint) {
-  const response = await HttpUtility.delete(endpoint);
+  const response = await HttpUtility.del(endpoint);
 
   return _restModelCreator(Model, response);
 }
