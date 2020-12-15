@@ -20,10 +20,38 @@ export function createCategory(category, callback = (id) => ({ id })) {
   return async (dispatch, getState) => {
     const response = await ActionUtility.createThunkEffect(dispatch, REQUEST_CATEGORIES_CREATE, CategoriesEffect.requestCreateCategory, category);
     if (!(response instanceof HttpErrorResponseModel)) {
-      callback(response.id);
       dispatch(ToastsAction.add('Categoría agregada', ToastStatusEnum.Success));
+      callback(response.id);
     } else {
       callback(false);
+    }
+  };
+}
+
+export const REQUEST_CATEGORIES_UPDATE = 'CategoriesAction.REQUEST_CATEGORIES_UPDATE';
+export const REQUEST_CATEGORIES_UPDATE_FINISHED = 'CategoriesAction.REQUEST_CATEGORIES_UPDATE_FINISHED';
+
+export function updateCategory(category) {
+  return async (dispatch, getState) => {
+    const response = await ActionUtility.createThunkEffect(dispatch, REQUEST_CATEGORIES_UPDATE, CategoriesEffect.requestUpdateCategory, category);
+    if (!(response instanceof HttpErrorResponseModel)) {
+      dispatch(ToastsAction.add('Categoría actualizada', ToastStatusEnum.Success));
+    } else {
+      dispatch(getCategories());
+    }
+  };
+}
+
+export const REQUEST_CATEGORIES_DELETE = 'CategoriesAction.REQUEST_CATEGORIES_DELETE';
+export const REQUEST_CATEGORIES_DELETE_FINISHED = 'CategoriesAction.REQUEST_CATEGORIES_DELETE_FINISHED';
+
+export function deleteCategory(id) {
+  return async (dispatch, getState) => {
+    const response = await ActionUtility.createThunkEffect(dispatch, REQUEST_CATEGORIES_DELETE, CategoriesEffect.requestDeleteCategory, id);
+    if (!(response instanceof HttpErrorResponseModel)) {
+      dispatch(ToastsAction.add('Categoría eliminada', ToastStatusEnum.Success));
+    } else {
+      dispatch(getCategories());
     }
   };
 }

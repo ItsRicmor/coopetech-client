@@ -13,6 +13,18 @@ export async function postToModel(Model, endpoint, data) {
   return _restModelCreator(Model, response);
 }
 
+export async function putToModel(Model, endpoint, data) {
+  const response = await HttpUtility.put(endpoint, data);
+
+  return _restModelCreator(Model, response);
+}
+
+export async function deleteToModel(Model, endpoint) {
+  const response = await HttpUtility.delete(endpoint);
+
+  return _restModelCreator(Model, response);
+}
+
 function _restModelCreator(Model, response) {
   if (response instanceof HttpErrorResponseModel) {
     return response;

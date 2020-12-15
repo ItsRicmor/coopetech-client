@@ -20,6 +20,20 @@ const brandReducer = baseReducer(initialState, {
       items: [brand, ...state.items],
     };
   },
+  [BrandsAction.REQUEST_BRANDS_UPDATE_FINISHED](state, action) {
+    const product = action.payload;
+    return {
+      ...state,
+      items: [product, ...state.items.filter((item) => item.id !== product.id)],
+    };
+  },
+  [BrandsAction.REQUEST_BRANDS_DELETE_FINISHED](state, action) {
+    const { id } = action.payload;
+    return {
+      ...state,
+      items: [...state.items.filter((item) => item.id !== id)],
+    };
+  },
 });
 
 export default brandReducer;

@@ -14,10 +14,24 @@ const categoriesReducer = baseReducer(initialState, {
     };
   },
   [CategoriesAction.REQUEST_CATEGORIES_CREATE_FINISHED](state, action) {
-    const categories = action.payload;
+    const category = action.payload;
     return {
       ...state,
-      items: [categories, ...state.items],
+      items: [category, ...state.items],
+    };
+  },
+  [CategoriesAction.REQUEST_CATEGORIES_UPDATE_FINISHED](state, action) {
+    const product = action.payload;
+    return {
+      ...state,
+      items: [product, ...state.items.filter((item) => item.id !== product.id)],
+    };
+  },
+  [CategoriesAction.REQUEST_CATEGORIES_DELETE_FINISHED](state, action) {
+    const { id } = action.payload;
+    return {
+      ...state,
+      items: [...state.items.filter((item) => item.id !== id)],
     };
   },
 });

@@ -27,3 +27,31 @@ export function createBrand(brand, callback = (id) => ({ id })) {
     }
   };
 }
+
+export const REQUEST_BRANDS_UPDATE = 'BrandsAction.REQUEST_BRANDS_UPDATE';
+export const REQUEST_BRANDS_UPDATE_FINISHED = 'BrandsAction.REQUEST_BRANDS_UPDATE_FINISHED';
+
+export function updateBrand(brand) {
+  return async (dispatch, getState) => {
+    const response = await ActionUtility.createThunkEffect(dispatch, REQUEST_BRANDS_UPDATE, BrandsEffect.requestUpdateBrand, brand);
+    if (!(response instanceof HttpErrorResponseModel)) {
+      dispatch(ToastsAction.add('Marca actualizada', ToastStatusEnum.Success));
+    } else {
+      dispatch(getBrands());
+    }
+  };
+}
+
+export const REQUEST_BRANDS_DELETE = 'BrandsAction.REQUEST_BRANDS_DELETE';
+export const REQUEST_BRANDS_DELETE_FINISHED = 'BrandsAction.REQUEST_BRANDS_DELETE_FINISHED';
+
+export function deleteBrand(id) {
+  return async (dispatch, getState) => {
+    const response = await ActionUtility.createThunkEffect(dispatch, REQUEST_BRANDS_DELETE, BrandsEffect.requestDeleteBrand, id);
+    if (!(response instanceof HttpErrorResponseModel)) {
+      dispatch(ToastsAction.add('Categoría eliminada', ToastStatusEnum.Success));
+    } else {
+      dispatch(getBrands());
+    }
+  };
+}

@@ -11,3 +11,13 @@ export async function requestCreateProduct(product) {
   const endpoint = environment.api.products.replace(':id', '');
   return EffectUtility.postToModel(ProductModel, endpoint, product);
 }
+
+export async function requestUpdateProduct(product) {
+  const endpoint = environment.api.products.replace(':id', product.id);
+  return EffectUtility.putToModel(ProductModel, endpoint, product);
+}
+
+export async function requestDeleteBrand(id) {
+  const endpoint = environment.api.products.replace(':id', id);
+  return EffectUtility.deleteToModel(ProductModel, endpoint);
+}
