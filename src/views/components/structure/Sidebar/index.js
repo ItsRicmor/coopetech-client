@@ -3,7 +3,7 @@ import { Nav, Collapse } from 'reactstrap';
 import AppContext from '../../../context';
 import SideMenu from './components/SideMenu';
 import allRoutes from '../../../routes';
-import { useWindowDimensions } from '../../../../utilities/hooks';
+import { useWindowDimensions } from '../../../hooks';
 import BreakpointsEnum from '../../../../constants/BreakpointsEnum';
 import './sidebar.scss';
 

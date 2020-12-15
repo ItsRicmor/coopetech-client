@@ -78,7 +78,7 @@ const InventoryTable = ({ items }) => {
   };
 
   const onEditCell = (id) => {
-    // history.push(`activities/edit/${id}`);
+    history.push(RouteMap.Inventory.edit(id));
   };
 
   const options = {

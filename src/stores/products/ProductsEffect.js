@@ -7,6 +7,11 @@ export async function requestProducts() {
   return EffectUtility.getToModel(ProductModel, endpoint);
 }
 
+export async function requestProductById(id) {
+  const endpoint = environment.api.products.replace(':id', id);
+  return EffectUtility.getToModel(ProductModel, endpoint);
+}
+
 export async function requestCreateProduct(product) {
   const endpoint = environment.api.products.replace(':id', '');
   return EffectUtility.postToModel(ProductModel, endpoint, product);

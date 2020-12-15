@@ -2,6 +2,10 @@ import { createSelector } from 'reselect';
 
 class ProductsSelector {
   static selectProducts = (products) => {
+    return products;
+  };
+
+  static selectProductsToTable = (products) => {
     return ProductsSelector._createTableRows(ProductsSelector._sortByDateDESC(products));
   };
 
@@ -31,4 +35,5 @@ class ProductsSelector {
 
 export default ProductsSelector;
 
+export const selectProductsToTable = createSelector((state) => state.products.items, ProductsSelector.selectProductsToTable);
 export const selectProducts = createSelector((state) => state.products.items, ProductsSelector.selectProducts);

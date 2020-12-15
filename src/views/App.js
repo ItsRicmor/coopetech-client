@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ConnectedRouter } from 'connected-react-router';
 import AppContext from './context';
 import Layout from './layouts/Layout';
-import { useToastEffect } from '../utilities/hooks';
+import { useToastEffect } from './hooks';
 
 const { Provider } = AppContext;
 

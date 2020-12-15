@@ -6,12 +6,13 @@ import RouteMap from '../../constants/RouteMap';
 
 const InventoryContainer = loadable(() => import('../pages/inventory'), { fallback: <Loader /> });
 const CreateInventoryContainer = loadable(() => import('../pages/inventory/CreateProduct'), { fallback: <Loader /> });
+const EditInventoryContainer = loadable(() => import('../pages/inventory/EditProduct'), { fallback: <Loader /> });
 
 const InventoryRoutes = () => (
   <Switch>
     <Route path={RouteMap.Inventory.root} exact component={InventoryContainer} />
     <Route path={RouteMap.Inventory.create} exact component={CreateInventoryContainer} />
-    {/* <Route path={RouteMap.Inventory.edit} exact component={EditMember} /> */}
+    <Route path={RouteMap.Inventory.edit()} exact component={EditInventoryContainer} />
 
     {/*Redirect*/}
     <Redirect to={RouteMap.Errors.notFound} />

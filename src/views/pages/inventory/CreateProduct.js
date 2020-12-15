@@ -1,22 +1,11 @@
 import React from 'react';
-import { FormContainer } from '../../components/forms';
-import Loader from '../../components/common/Loader';
-import ProductProvider from '../../providers/ProductProvider';
-import { useLoadCategories, useLoadBrands } from '../../../utilities/hooks';
-import InventoryForm from './forms/InventoryForm';
+import { useLoadCategories, useLoadBrands } from '../../hooks';
+import FormProductContainer from './forms/FormProductContainer';
 
 const CreateProductContainer = () => {
   const isLoadCategories = useLoadCategories();
   const isLoadBrands = useLoadBrands();
-  return isLoadCategories && isLoadBrands ? (
-    <Loader />
-  ) : (
-    <FormContainer>
-      <ProductProvider>
-        <InventoryForm />
-      </ProductProvider>
-    </FormContainer>
-  );
+  return <FormProductContainer isloading={isLoadCategories && isLoadBrands} />;
 };
 
 export default CreateProductContainer;

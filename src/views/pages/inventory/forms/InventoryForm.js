@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardBody, CardFooter, CardHeader, Form, Row, Col } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -10,7 +11,7 @@ import * as CategoriesAction from '../../../../stores/categories/CategoriesActio
 import * as BrandsAction from '../../../../stores/brands/BrandsAction';
 import { selectCategoriesToOptions } from '../../../../selectors/categories/CategoriesSelector';
 import { selectBrandsToOptions } from '../../../../selectors/brands/BrandsSelector';
-import { useIsRequesting, useHasErrors } from '../../../../utilities/hooks';
+import { useIsRequesting, useHasErrors } from '../../../hooks';
 import RouteMap from '../../../../constants/RouteMap';
 import { delay } from '../../../../utilities/utils';
 
@@ -19,7 +20,7 @@ import ButtonIcon from '../../../components/common/ButtonIcon';
 import { InputForm, CreatableSelectInputForm } from '../../../components/forms/inputs';
 import { ProductContext } from '../../../context';
 
-const InventoryForm = () => {
+const InventoryForm = ({ isUpdate }) => {
   const [sent, setSent] = useState(false);
   const { item, handleItemChange } = useContext(ProductContext);
   const history = useHistory();
@@ -29,13 +30,13 @@ const InventoryForm = () => {
 
   const brandsOptions = useSelector(selectBrandsToOptions);
 
-  const isRequesting = useIsRequesting([ProductsAction.REQUEST_PRODUCTS_CREATE]);
+  const isRequesting = useIsRequesting([ProductsAction.REQUEST_PRODUCTS_CREATE, ProductsAction.REQUEST_PRODUCTS_UPDATE]);
 
   const isCreatingCategory = useIsRequesting([CategoriesAction.REQUEST_CATEGORIES_CREATE]);
 
   const isCreatingBrand = useIsRequesting([BrandsAction.REQUEST_BRANDS_CREATE]);
 
-  const hasErrors = useHasErrors([ProductsAction.REQUEST_PRODUCTS_CREATE_FINISHED]);
+  const hasErrors = useHasErrors([ProductsAction.REQUEST_PRODUCTS_CREATE_FINISHED, ProductsAction.REQUEST_PRODUCTS_UPDATE_FINISHED]);
 
   const { register, handleSubmit, errors } = useForm();
 
@@ -53,7 +54,11 @@ const InventoryForm = () => {
   }, [hasErrors, sent, history]);
 
   const onSubmitData = async () => {
-    await dispatch(ProductsAction.createProduct(item));
+    if (!isUpdate) {
+      dispatch(ProductsAction.createProduct(item));
+    } else {
+      dispatch(ProductsAction.updateProduct(item));
+    }
     setSent(true);
   };
 
@@ -71,14 +76,14 @@ const InventoryForm = () => {
     dispatch(BrandsAction.createBrand({ name: value }, callback('brand_id')));
   };
 
-  const { description, quantity, price, brand_id, category_id } = item;
+  const { id, description, quantity, price, brand_id, category_id } = item;
 
   return (
     <Card tag={Form} onSubmit={handleSubmit(onSubmitData)} className="shadow-sm">
       <CardHeader>
         <Row>
           <Col className="d-flex justify-content-center">
-            <h5>Creando un Producto</h5>
+            <h5>{isUpdate ? 'Actualizando' : 'Creando'} un Producto</h5>
           </Col>
         </Row>
       </CardHeader>
@@ -88,7 +93,8 @@ const InventoryForm = () => {
             <InputForm
               label="Código"
               name="id"
-              value={description}
+              value={id}
+              disabled={isUpdate}
               placeholder="Código del producto"
               onChange={handleItemChange}
               errors={errors}
@@ -190,13 +196,21 @@ const InventoryForm = () => {
               color="success"
               type="submit"
             >
-              Crear Producto
+              {isUpdate ? 'Actualizar Producto' : 'Crear Producto'}
             </ButtonIcon>
           </Flex>
         </Row>
       </CardFooter>
     </Card>
   );
+};
+
+InventoryForm.propTypes = {
+  isUpdate: PropTypes.bool,
+};
+
+InventoryForm.defaultProps = {
+  isUpdate: false,
 };
 
 export default InventoryForm;

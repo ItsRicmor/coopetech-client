@@ -1,5 +1,6 @@
 import HttpErrorResponseModel from '../models/HttpErrorResponseModel';
 import * as HttpUtility from './HttpUtility';
+import * as Utils from './utils';
 
 export async function getToModel(Model, endpoint, params) {
   const response = await HttpUtility.get(endpoint, params);
@@ -29,5 +30,5 @@ function _restModelCreator(Model, response) {
   if (response instanceof HttpErrorResponseModel) {
     return response;
   }
-  return !Array.isArray(response.data.results) ? new Model(response.data.results) : response.data.results.map((json) => new Model(json));
+  return !Utils.isIterableArray(response.data.results) ? new Model(response.data.results) : response.data.results.map((json) => new Model(json));
 }

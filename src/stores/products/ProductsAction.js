@@ -13,6 +13,15 @@ export function getProducts() {
   };
 }
 
+export const REQUEST_PRODUCTS_BY_ID = 'ProductsAction.REQUEST_PRODUCTS_BY_ID';
+export const REQUEST_PRODUCTS_BY_ID_FINISHED = 'ProductsAction.REQUEST_PRODUCTS_BY_ID_FINISHED';
+
+export function getProductById(id) {
+  return async (dispatch, getState) => {
+    await ActionUtility.createThunkEffect(dispatch, REQUEST_PRODUCTS_BY_ID, ProductsEffect.requestProductById, id);
+  };
+}
+
 export const REQUEST_PRODUCTS_CREATE = 'ProductsAction.REQUEST_PRODUCTS_CREATE';
 export const REQUEST_PRODUCTS_CREATE_FINISHED = 'ProductsAction.REQUEST_PRODUCTS_CREATE_FINISHED';
 

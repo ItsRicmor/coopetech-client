@@ -20,7 +20,7 @@ const inventoryRoutes = {
   Inventory: {
     root: inventoryRoot,
     create: `${inventoryRoot}/create`,
-    edit: `${inventoryRoot}/:id`,
+    edit: (id = ':id') => `${inventoryRoot}/${id}`,
   },
 };
 
@@ -30,7 +30,7 @@ const associatesRoutes = {
   Associates: {
     root: associatesRoot,
     create: `${associatesRoot}/create`,
-    edit: `${associatesRoot}/:id`,
+    edit: (id) => `${associatesRoot}/${id}`,
   },
 };
 
