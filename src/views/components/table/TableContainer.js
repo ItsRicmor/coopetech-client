@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Table from './Table';
+import HeaderTable from './components/HeaderTable';
 
 const { SearchBar } = Search;
 
-const TableContainer = ({ items, columns, headerRender }) => {
+const TableContainer = ({ items, columns, title, actions, searchBarIsOpen }) => {
   const table = createRef();
   const [isSelected, setIsSelected] = useState(false);
 
@@ -33,10 +34,12 @@ const TableContainer = ({ items, columns, headerRender }) => {
       }}
     >
       {({ baseProps, searchProps }) => {
-        const headerProps = { SearchBar, searchProps, isSelected };
+        const headerProps = { SearchBar, searchProps, isSelected, title, actions, searchBarIsOpen };
         return (
           <Card className="mb-3 mt-4">
-            <CardHeader className="bg-light">{headerRender(headerProps)}</CardHeader>
+            <CardHeader className="bg-light">
+              <HeaderTable {...headerProps} />
+            </CardHeader>
             <CardBody className="p-0">
               <Table reference={table} baseProps={baseProps} options={options} onSelect={onSelect} />
             </CardBody>
@@ -50,7 +53,15 @@ const TableContainer = ({ items, columns, headerRender }) => {
 TableContainer.propTypes = {
   items: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
-  headerRender: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+      text: PropTypes.string.isRequired,
+      onClick: PropTypes.func.isRequired,
+      color: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 export default TableContainer;

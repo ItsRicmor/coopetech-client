@@ -106,18 +106,13 @@ const InventoryTable = ({ items }) => {
       <TableContainer
         columns={columns}
         items={items}
-        headerRender={(props) => (
-          <HeaderTable
-            title="Inventario"
-            searchBarIsOpen={searchBar}
-            actions={[
-              { color: 'success', icon: faPlus, text: 'Crear', onClick: () => history.push(RouteMap.Inventory.create) },
-              { color: 'info', icon: faFilter, text: 'Filtrar', onClick: toggleSearchBar },
-              { color: 'primary', icon: faExternalLinkAlt, text: 'Exportar', onClick: () => ({}) },
-            ]}
-            {...props}
-          />
-        )}
+        title="Inventario"
+        searchBarIsOpen={searchBar}
+        actions={[
+          { color: 'success', icon: faPlus, text: 'Crear', onClick: () => history.push(RouteMap.Inventory.create) },
+          { color: 'info', icon: faFilter, text: 'Filtrar', onClick: toggleSearchBar },
+          { color: 'primary', icon: faExternalLinkAlt, text: 'Exportar', onClick: () => ({}) },
+        ]}
       />
       <ModalConfirm
         modal={modal}
