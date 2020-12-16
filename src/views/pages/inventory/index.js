@@ -6,7 +6,7 @@ import { useLoadProducts, useIsRequesting } from '../../hooks';
 import * as ProductsAction from '../../../stores/products/ProductsAction';
 import Loader from '../../components/common/Loader';
 
-const AllManagement = () => {
+const Inventory = () => {
   const isLoadProduct = useLoadProducts();
   const isRequesting = useIsRequesting([ProductsAction.REQUEST_PRODUCTS_DELETE]);
   const products = useSelector(selectProductsToTable);
@@ -14,4 +14,4 @@ const AllManagement = () => {
   return isLoadProduct || isRequesting ? <Loader /> : <InventoryTable items={products} />;
 };
 
-export default React.memo(AllManagement);
+export default React.memo(Inventory);
