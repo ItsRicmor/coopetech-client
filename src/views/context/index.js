@@ -5,5 +5,6 @@ const AppContext = createContext({
 });
 
 export const ProductContext = createContext({});
+export const PurchaseContext = createContext({});
 
 export default AppContext;
