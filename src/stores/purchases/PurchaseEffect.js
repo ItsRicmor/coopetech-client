@@ -4,7 +4,6 @@ import * as EffectUtility from '../../utilities/EffectUtility';
 
 export async function requestPurchases() {
   const endpoint = environment.api.purchases.replace(':id', '');
-
   return EffectUtility.getToModel(PurchaseModel, endpoint);
 }
 

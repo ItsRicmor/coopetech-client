@@ -10,7 +10,6 @@ const Purchase = () => {
   const isLoadPurchase = useLoadPurchases();
   const isRequesting = useIsRequesting([PurchaseAction.REQUEST_PURCHASES_DELETE]);
   const purchases = useSelector(selectPurchaseToTable);
-  console.log(purchases);
 
   return isLoadPurchase || isRequesting ? <Loader /> : <PurchaseTable items={purchases} />;
 };

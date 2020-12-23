@@ -27,12 +27,12 @@ class PurchaseSelector {
       description: model.description,
       quantity: model.quantity,
       total: `₡ ${model.total}`,
-      product: product.name,
+      //    product: product.name,
     }));
   };
 }
 
 export default PurchaseSelector;
 
-export const selectPurchaseToTable = createSelector((state) => state.purchases, PurchaseSelector.selectPurchaseToTable);
+export const selectPurchaseToTable = createSelector((state) => state.purchases.items, PurchaseSelector.selectPurchaseToTable);
 export const selectPurchases = createSelector((state) => state.purchases.items, PurchaseSelector.selectPurchases);
