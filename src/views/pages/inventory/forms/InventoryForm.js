@@ -1,30 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardBody, CardFooter, CardHeader, Form, Row, Col } from 'reactstrap';
+import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Card, CardBody, CardFooter, CardHeader, Form, Row, Col } from 'reactstrap';
 import { faSpinner, faArrowLeft, faSave, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
-import * as ProductsAction from '../../../../stores/products/ProductsAction';
-import * as CategoriesAction from '../../../../stores/categories/CategoriesAction';
-import * as BrandsAction from '../../../../stores/brands/BrandsAction';
-import { selectCategoriesToOptions } from '../../../../selectors/categories/CategoriesSelector';
-import { selectBrandsToOptions } from '../../../../selectors/brands/BrandsSelector';
-import { useIsRequesting, useHasErrors } from '../../../hooks';
-import RouteMap from '../../../../constants/RouteMap';
-import { delay } from '../../../../utilities/utils';
-
+import { useIsRequesting } from '../../../hooks';
+import { ProductContext } from '../../../context';
 import Flex from '../../../components/common/Flex';
 import ButtonIcon from '../../../components/common/ButtonIcon';
+import * as BrandsAction from '../../../../stores/brands/BrandsAction';
+import * as ProductsAction from '../../../../stores/products/ProductsAction';
+import * as CategoriesAction from '../../../../stores/categories/CategoriesAction';
+import { selectBrandsToOptions } from '../../../../selectors/brands/BrandsSelector';
 import { InputForm, CreatableSelectInputForm } from '../../../components/forms/inputs';
-import { ProductContext } from '../../../context';
+import { selectCategoriesToOptions } from '../../../../selectors/categories/CategoriesSelector';
 
 const InventoryForm = ({ isUpdate }) => {
-  const [sent, setSent] = useState(false);
-  const { item, handleItemChange } = useContext(ProductContext);
+  const { item, sent, handleItemChange, onSubmitData, handleCategoryCreateOption, handleBrandCreateOption } = useContext(ProductContext);
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const categoriesOptions = useSelector(selectCategoriesToOptions);
 
@@ -36,44 +31,7 @@ const InventoryForm = ({ isUpdate }) => {
 
   const isCreatingBrand = useIsRequesting([BrandsAction.REQUEST_BRANDS_CREATE]);
 
-  const hasErrors = useHasErrors([ProductsAction.REQUEST_PRODUCTS_CREATE_FINISHED, ProductsAction.REQUEST_PRODUCTS_UPDATE_FINISHED]);
-
   const { register, handleSubmit, errors } = useForm();
-
-  useEffect(() => {
-    (async () => {
-      if (sent && !hasErrors) {
-        await delay();
-        history.push(RouteMap.Inventory.root);
-      }
-    })();
-  }, [hasErrors, sent, history]);
-
-  const validateCallback = (id) => {
-    setSent(!!id);
-  };
-
-  const onSubmitData = async () => {
-    if (!isUpdate) {
-      dispatch(ProductsAction.createProduct(item, validateCallback));
-    } else {
-      dispatch(ProductsAction.updateProduct(item, validateCallback));
-    }
-  };
-
-  const callback = (name) => (id = false) => {
-    if (id) {
-      handleItemChange({ name, value: id });
-    }
-  };
-
-  const handleCategoryCreateOption = async (value) => {
-    dispatch(CategoriesAction.createCategory({ name: value }, callback('category_id')));
-  };
-
-  const handleBrandCreateOption = async (value) => {
-    dispatch(BrandsAction.createBrand({ name: value }, callback('brand_id')));
-  };
 
   const { id, description, quantity, price, brand_id, category_id } = item;
 
