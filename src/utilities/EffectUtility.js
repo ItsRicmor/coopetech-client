@@ -27,9 +27,9 @@ export async function deleteToModel(Model, endpoint) {
 }
 
 function _restModelCreator(Model, response) {
-  const data = response.data.results;
   if (response instanceof HttpErrorResponseModel) {
     return response;
   }
+  const data = response.data.results;
   return !Array.isArray(data) ? new Model(data) : data.map((json) => new Model(json));
 }
