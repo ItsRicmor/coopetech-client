@@ -45,21 +45,20 @@ const InventoryForm = ({ isUpdate }) => {
       if (sent && !hasErrors) {
         await delay();
         history.push(RouteMap.Inventory.root);
-      } else {
-        if (sent) {
-          setSent(false);
-        }
       }
     })();
   }, [hasErrors, sent, history]);
 
+  const validateCallback = (id) => {
+    setSent(!!id);
+  };
+
   const onSubmitData = async () => {
     if (!isUpdate) {
-      dispatch(ProductsAction.createProduct(item));
+      dispatch(ProductsAction.createProduct(item, validateCallback));
     } else {
-      dispatch(ProductsAction.updateProduct(item));
+      dispatch(ProductsAction.updateProduct(item, validateCallback));
     }
-    setSent(true);
   };
 
   const callback = (name) => (id = false) => {

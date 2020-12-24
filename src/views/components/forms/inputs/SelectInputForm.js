@@ -13,7 +13,6 @@ const SelectInputFrom = ({ name, label, id, tag: Tag = Select, value, type, clas
       value={value}
       type={type}
       onChange={(option) => {
-        console.log(option);
         const { value = null } = option || {};
         onChange({ name: name, value });
       }}
