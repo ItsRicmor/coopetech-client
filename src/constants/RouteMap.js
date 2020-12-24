@@ -51,6 +51,16 @@ const errorsRoutes = {
   },
 };
 
+const purchaseRoot = `${dashboardRoot}/purchase`;
+
+const purchaseRoutes = {
+  Purchase: {
+    root: purchaseRoot,
+    create: `${purchaseRoot}/create`,
+    edit: (id) => `${associatesRoot}/${id}`,
+  },
+};
+
 const RouteMap = {
   ...homeRoutes,
   ...dashboardRoutes,
@@ -58,6 +68,7 @@ const RouteMap = {
   ...associatesRoutes,
   ...storeRoutes,
   ...errorsRoutes,
+  ...purchaseRoutes,
 };
 
 export default RouteMap;

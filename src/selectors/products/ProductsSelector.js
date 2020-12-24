@@ -31,9 +31,23 @@ class ProductsSelector {
       category: category.name,
     }));
   };
+
+  static selectProductsToOptions = (product) => {
+    return ProductsSelector._productsToOptionRows(product);
+  };
+
+  static _productsToOptionRows = (models) => {
+    return models.map(({ name, id }) => {
+      return {
+        value: id,
+        label: name,
+      };
+    });
+  };
 }
 
 export default ProductsSelector;
 
 export const selectProductsToTable = createSelector((state) => state.products.items, ProductsSelector.selectProductsToTable);
 export const selectProducts = createSelector((state) => state.products.items, ProductsSelector.selectProducts);
+export const selectProductsToOptions = createSelector((state) => state.products.items, ProductsSelector.selectProductsToOptions);

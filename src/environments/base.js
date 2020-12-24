@@ -16,6 +16,7 @@ export default function baseEnv(baseApi) {
       products: `${baseApi}/api/products/:id`,
       categories: `${baseApi}/api/categories/:id`,
       brands: `${baseApi}/api/brands/:id`,
+      purchases: `${baseApi}/api/purchases/:id`,
     },
     isProduction: true,
     isDevelopment: false,

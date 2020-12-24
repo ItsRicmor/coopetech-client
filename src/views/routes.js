@@ -41,6 +41,17 @@ const StoreRoute = {
   },
 };
 
+const PurchaseRoute = {
+  name: 'Compras',
+  to: RouteMap.Purchase.root,
+  exact: true,
+  icon: faStoreAlt,
+  badge: {
+    text: `soon`,
+    color: 'secondary',
+  },
+};
+
 // export const GaleryRoutes = {
 //   name: 'Galería',
 //   to: '/admin/gallery',
@@ -56,4 +67,4 @@ const StoreRoute = {
 //   ],
 // };
 
-export default [DashboardRoute, InventoryRoute, AssociatesRoute, StoreRoute];
+export default [DashboardRoute, InventoryRoute, AssociatesRoute, StoreRoute, PurchaseRoute];

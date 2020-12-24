@@ -6,6 +6,7 @@ import toastsReducer from './toasts/ToastsReducer';
 import productsReducer from './products/ProductsReducer';
 import categoriesReducer from './categories/CategoriesReducer';
 import brandsReducer from './brands/BrandsReducer';
+import purchaseReducer from '../stores/purchases/PurchaseReducer';
 
 export default function rootReducer(history) {
   const reducerMap = {
@@ -16,6 +17,7 @@ export default function rootReducer(history) {
     products: productsReducer,
     categories: categoriesReducer,
     brands: brandsReducer,
+    purchases: purchaseReducer,
   };
 
   return combineReducers(reducerMap);

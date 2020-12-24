@@ -36,6 +36,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/prop-types': 0,
     'react/display-name': 0,
+    'prettier/prettier': 0,
   },
   settings: {
     react: {
