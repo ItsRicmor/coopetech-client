@@ -27,8 +27,9 @@ export async function deleteToModel(Model, endpoint) {
 }
 
 function _restModelCreator(Model, response) {
+  const data = response.data.results;
   if (response instanceof HttpErrorResponseModel) {
     return response;
   }
-  return !Utils.isIterableArray(response.data.results) ? new Model(response.data.results) : response.data.results.map((json) => new Model(json));
+  return !Array.isArray(data) ? new Model(data) : data.map((json) => new Model(json));
 }
