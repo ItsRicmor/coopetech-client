@@ -27,7 +27,7 @@ class PurchaseSelector {
       description: model.description,
       quantity: model.quantity,
       total: `₡ ${model.total}`,
-      //    product: product.name,
+      //product: product.description,
     }));
   };
 }

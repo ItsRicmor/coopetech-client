@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { faPlus, faFilter, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 
-import * as ProductsAction from '../../../stores/products/ProductsAction';
+import * as PurchaseAction from '../../../stores/purchases/PurchaseAction';
 import RouteMap from '../../../constants/RouteMap';
 import TableContainer from '../../components/table/TableContainer';
 import HeaderTable from '../../components/table/components/HeaderTable';
@@ -77,7 +77,7 @@ const PurchaseTable = ({ items }) => {
   };
 
   const onDeleteAction = () => {
-    dispatch(ProductsAction.deleteProduct(idToDelete));
+    dispatch(PurchaseAction.deletePurchases(idToDelete));
     toggleModal();
   };
 

@@ -47,8 +47,8 @@ const PurchaseRoute = {
   exact: true,
   icon: faStoreAlt,
   badge: {
-    text: `soon`,
-    color: 'secondary',
+    text: `building`,
+    color: 'warning',
   },
 };
 

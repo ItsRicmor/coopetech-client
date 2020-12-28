@@ -19,7 +19,7 @@ export async function requestDeletePurchase(id) {
 
 export async function requestUpdatePurchase(purchase) {
   const endpoint = environment.api.purchases.replace(':id', purchase.id);
-  return EffectUtility.putToModel(ProductModel, endpoint, purchase);
+  return EffectUtility.putToModel(PurchaseModel, endpoint, purchase);
 }
 
 export async function requestPurchaseById(id) {

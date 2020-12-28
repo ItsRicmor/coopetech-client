@@ -7,7 +7,7 @@ import * as ErrorsAction from '../../../stores/error/ErrorAction';
 import RouteMap from '../../../constants/RouteMap';
 import FormPurchaseContainer from './form/FormPurchaseContainer';
 
-const CreateProductContainer = ({
+const EditPurchaseContainer = ({
   match: {
     params: { id },
   },
@@ -30,4 +30,4 @@ const CreateProductContainer = ({
   return <FormPurchaseContainer isloading={isLoading} defaultItem={purchase} />;
 };
 
-export default CreateProductContainer;
+export default EditPurchaseContainer;

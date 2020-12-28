@@ -57,7 +57,7 @@ const purchaseRoutes = {
   Purchase: {
     root: purchaseRoot,
     create: `${purchaseRoot}/create`,
-    edit: (id) => `${associatesRoot}/${id}`,
+    edit: (id) => `${purchaseRoot}/${id}`,
   },
 };
 

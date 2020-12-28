@@ -25,7 +25,7 @@ const PurchaseForm = ({ isUpdate }) => {
   const dispatch = useDispatch();
 
   const productsOptions = useSelector(selectProductsToOptions);
-  console.log(productsOptions);
+
   const isRequesting = useIsRequesting([PurchaseAction.REQUEST_PURCHASES_CREATE, PurchaseAction.REQUEST_PURCHASES_UPDATE]);
 
   const isCreatingProduct = useIsRequesting([PurchaseAction.REQUEST_PURCHASES_CREATE]);
@@ -38,7 +38,7 @@ const PurchaseForm = ({ isUpdate }) => {
     (async () => {
       if (sent && !hasErrors) {
         await delay();
-        history.push(RouteMap.Inventory.root);
+        history.push(RouteMap.Purchase.root);
       } else {
         if (sent) {
           setSent(false);

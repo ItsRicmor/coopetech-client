@@ -28,10 +28,10 @@ const purchaseReducer = baseReducer(initialState, {
     };
   },
   [PurchaseAction.REQUEST_PURCHASES_DELETE_FINISHED](state, action) {
-    const purchase = action.payload;
+    const { id } = action.payload;
     return {
       ...state,
-      items: [purchase, ...state.items.filter((item) => item.id !== purchase.id)],
+      items: [...state.items.filter((item) => item.id !== id)],
     };
   },
   [PurchaseAction.REQUEST_PURCHASE_BY_ID_FINISHED](state, action) {

@@ -32,15 +32,15 @@ class ProductsSelector {
     }));
   };
 
-  static selectProductsToOptions = (product) => {
-    return ProductsSelector._productsToOptionRows(product);
+  static selectProductsToOptions = (products) => {
+    return ProductsSelector._productsToOptionRows(products);
   };
 
   static _productsToOptionRows = (models) => {
-    return models.map(({ name, id }) => {
+    return models.map(({ description, id }) => {
       return {
         value: id,
-        label: name,
+        label: description,
       };
     });
   };
